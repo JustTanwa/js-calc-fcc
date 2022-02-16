@@ -1,0 +1,32 @@
+body {
+  box-sizing: border-box;
+}
+
+.main {
+  background-color: gray;
+  border: 2px solid black;
+  width: 200px;
+  height: 300px;
+  margin: auto;
+}
+
+.screen {
+  position: relative;
+  width: 90%;
+  height: 50px;
+  margin: 5px auto;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding-top: 2px;
+}
+.input {
+  position: absolute;
+  display: block;
+  top: 0;
+  background-color: red;
+}
+.output {
+  position: absolute;
+  right: 0;
+}
