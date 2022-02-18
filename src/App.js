@@ -8,13 +8,19 @@ class App extends React.Component {
     this.state = {
       input: 0,
       prevNum: "",
-      operator: undefined
+      operator: undefined,
+      lastPressed: "",
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
     const btnPressed = e.target.value;
+    // if input is too long
+    if (this.state.input.length > 13 && !isNaN(btnPressed)) return;
+    this.setState({
+      lastPressed: btnPressed,
+    });
     // check if button pressed is an operation button
     switch(btnPressed) {
       case "C":
@@ -23,6 +29,12 @@ class App extends React.Component {
         if (this.state.input.includes(".")) return;
         break;
       case "+":
+        if (this.state.input[0] === "-" && this.state.input.length === 1 && this.state.prevNum) {
+          return this.setState({
+            operator: "+",
+            input: 0,
+          })
+        };
         if (this.state.prevNum) {
           return this.setState({
             prevNum: this.calculate(),
@@ -37,6 +49,12 @@ class App extends React.Component {
             });
         }
       case "-":
+        if (this.state.input[0] === "-" && this.state.input.length === 1 && this.state.prevNum) {
+          return this.setState({
+            operator: "-",
+            input: 0,
+          })
+        };
         if (this.state.input === 0) {
           return this.setState({
             input: "-",
@@ -84,6 +102,7 @@ class App extends React.Component {
             });
         }
       case "=":
+        if (!this.state.prevNum || !this.state.operator) return;
         return this.setState({
           input: this.calculate(),
           prevNum: "",
@@ -118,10 +137,9 @@ class App extends React.Component {
 
   calculate() {
     let ans;
-    console.log(ans, this.state.operator, this.state.prevNum, this.state.input);
     const curNum = parseFloat(this.state.input);
     const prevNum = parseFloat(this.state.prevNum);
-    if (!this.state.prevNum || !this.state.operator) return;
+    if (!prevNum || !this.state.operator) return;
     switch(this.state.operator) {
       case "+":
         ans = prevNum + curNum;
@@ -145,6 +163,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="main">
+        <h1 className="title">JavaScript Calculator</h1>
         <div className="calculator">
           <Display input={this.state.input} output={this.state.prevNum} operator={this.state.operator} />
           <Buttons handleClick={this.handleClick} />

@@ -6,42 +6,42 @@ const operands = [
       value: 0
     },
     {
-      id: "one",
-      value: 1
+      id: "three",
+      value: 3
     },
     {
       id: "two",
       value: 2
     },
     {
-      id: "three",
-      value: 3
-    },
-    {
-      id: "four",
-      value: 4
-    },
-    {
-      id: "five",
-      value: 5
+      id: "one",
+      value: 1
     },
     {
       id: "six",
       value: 6
     },
     {
-      id: "seven",
-      value: 7
+      id: "five",
+      value: 5
+    },
+    {
+      id: "four",
+      value: 4
+    },
+    {
+      id: "nine",
+      value: 9
     },
     {
       id: "eight",
       value: 8
     },
     {
-      id: "nine",
-      value: 9
+      id: "seven",
+      value: 7
     }
-  ];
+  ].reverse();
   
   const operators = [
     {
@@ -77,7 +77,7 @@ const operands = [
 const Buttons = (props) => {
     return (
       <div className="keys">
-        <div className="number-buttons">
+        {/*<div className="number-buttons">*/}
           {operands.map((obj) => {
             return (
               <button
@@ -90,8 +90,8 @@ const Buttons = (props) => {
               </button>
             );
           })}
-        </div>
-        <div className="operator-buttons">
+        {/*</div>*/}
+        {/*<div className="operator-buttons">*/}
           {operators.map((obj) => {
             return (
               <button
@@ -104,7 +104,7 @@ const Buttons = (props) => {
               </button>
             );
           })}
-        </div>
+        {/*</div>*/}
       </div>
     );
   };
